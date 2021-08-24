@@ -1,0 +1,12 @@
+--- missions that i have to do ---
+
+- create the database first
+- make route to expect the input via GET method
+- response it with json : deactivated , already deactivated, deprective
+[to realize the situation of data]
+
+- make route to create entry and new Activated qr state
+
+
+- make user table
+- wrap all the app with basic auth && jwt auth as well as
