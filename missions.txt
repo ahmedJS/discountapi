@@ -1,6 +1,7 @@
 --- missions that i have to do ---
 
 - create the database first
+- link database to app via class
 - make route to expect the input via GET method
 - response it with json : deactivated , already deactivated, deprective
 [to realize the situation of data]
