@@ -26,6 +26,10 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
+        'M' => 
+        array (
+            'MyDeps\\' => 7,
+        ),
         'I' => 
         array (
             'Interop\\Http\\Factory\\' => 21,
@@ -33,7 +37,20 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
+        ),
+        'D' => 
+        array (
+            'DASPRiD\\Enum\\' => 13,
+        ),
+        'C' => 
+        array (
+            'Controllers\\' => 12,
+        ),
+        'B' => 
+        array (
+            'BaconQrCode\\' => 12,
         ),
     );
 
@@ -64,6 +81,10 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'MyDeps\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Src/Mydependencies',
+        ),
         'Interop\\Http\\Factory\\' => 
         array (
             0 => __DIR__ . '/..' . '/http-interop/http-factory/src',
@@ -72,9 +93,25 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'DASPRiD\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Src/Controllers',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
     );
 

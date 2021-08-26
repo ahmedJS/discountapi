@@ -1,5 +1,7 @@
 <?php
+use Controllers\QRCodeProvider;
 use Slim\App as myapp;
+
 require_once "vendor/autoload.php";
 
 $myapp = new myapp([
@@ -8,5 +10,6 @@ $myapp = new myapp([
     ]
 ]);
 
+$myapp->get("/",new QRCodeProvider);
 
 $myapp->run();

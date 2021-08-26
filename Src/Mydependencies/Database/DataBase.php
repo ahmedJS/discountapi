@@ -3,7 +3,8 @@ namespace MyApp\Mydependencies\Database;
 
 use PDO;
 
-class DataBase{
+class DataBase
+{
     private PDO $mycon;
     private $query;
     function __construct()
@@ -14,10 +15,12 @@ class DataBase{
         $this->mycon = new PDO($dsn,$user,$pass);
     }
 
-    function query(\PDOStatement $query,Array $params)
+    function query($query,Array $params)
     {
         $myquery = $this->mycon->prepare($query);
         $myquery->execute($params);
         $this->query = $myquery;
     }
 }
+
+
