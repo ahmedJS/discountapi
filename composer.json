@@ -3,7 +3,7 @@
         "slim/slim": "3.0.0",
         "tuupola/slim-basic-auth": "3.0.0",
         "firebase/php-jwt": "3.0.0",
-        "bacon/bacon-qr-code": "^2.0"
+        "endroid/qr-code": "^4.2"
     },
 
     "autoload": {

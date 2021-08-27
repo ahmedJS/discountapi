@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '15281a5aa2456b32439cd60c3a744930109698c9',
+        'reference' => '4eed60f9366db38cea54cf133add650208090f7e',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '15281a5aa2456b32439cd60c3a744930109698c9',
+            'reference' => '4eed60f9366db38cea54cf133add650208090f7e',
             'dev_requirement' => false,
         ),
         'bacon/bacon-qr-code' => array(
@@ -44,6 +44,15 @@
             'install_path' => __DIR__ . '/../dasprid/enum',
             'aliases' => array(),
             'reference' => '5abf82f213618696dda8e3bf6f64dd042d8542b2',
+            'dev_requirement' => false,
+        ),
+        'endroid/qr-code' => array(
+            'pretty_version' => '4.2.2',
+            'version' => '4.2.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../endroid/qr-code',
+            'aliases' => array(),
+            'reference' => '53bfce79da95bf082484301fecbc1d77a3907f78',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(

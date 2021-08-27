@@ -40,6 +40,10 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
             'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
         ),
+        'E' => 
+        array (
+            'Endroid\\QrCode\\' => 15,
+        ),
         'D' => 
         array (
             'DASPRiD\\Enum\\' => 13,
@@ -100,6 +104,10 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Endroid\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/qr-code/src',
         ),
         'DASPRiD\\Enum\\' => 
         array (
