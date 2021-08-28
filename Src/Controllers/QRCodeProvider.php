@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Firebase\JWT\JWT;
 use Psr\Http\Message\ResponseInterface;
+use MyDeps\Database\DataBase;
 
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
@@ -23,9 +24,11 @@ class QRCodeProvider{
      * and it is considered as start point
      * @return ResponseInterface
      */
-
     function __invoke($req,$res,$args)
     {
+        $db = new Database();
+        //$db->query("insert into discount");
+
         $data_to_encoded = ["somthing"];
         $data = $this->jwt_encoder("HS256","psd12123434",$data_to_encoded);
 
@@ -33,6 +36,12 @@ class QRCodeProvider{
         $this->qr_generate($data,"mypic.png");
     }
 
+
+    /**
+     * @return array an associative array containing qr code and mime type
+     * @param string $data_included the data that needed to the qr code included
+     * @param string $path string that specify the directory and name of the qr code image file
+     */
     function qr_generate($data_included,$path){
         $result = Builder::create()
         ->writer(new PngWriter())
@@ -48,7 +57,11 @@ class QRCodeProvider{
         ->labelAlignment(new LabelAlignmentCenter())
         ->build();
 
-        $result->saveToFile("png.png");
+        $result->saveToFile($path);
+        
+        return ["qrcode" => $result->getString()
+                ,"mimetype" => $result->getMimeType()
+        ];
     }
 
 

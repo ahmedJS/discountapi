@@ -1,18 +1,21 @@
 <?php
-namespace MyApp\Mydependencies\Database;
+namespace MyDeps\Database;
 
 use PDO;
 
 class DataBase
 {
-    private PDO $mycon;
+    private  $mycon;
     private $query;
     function __construct()
     {
-        $dsn = "mysql:dbname='discountapi'";
+        $dsn = "mysql:host=localhost;port=3305;dbname='mydb'";
         $user= "root";
         $pass= "root";
-        $this->mycon = new PDO($dsn,$user,$pass);
+        $option = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ];
+        $this->mycon = new PDO($dsn,$user,$pass,$option);
     }
 
     function query($query,Array $params)
