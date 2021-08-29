@@ -9,7 +9,7 @@ class DataBase
     private $query;
     function __construct()
     {
-        $dsn = "mysql:host=localhost;port=3305;dbname='mydb'";
+        $dsn = "mysql:host=localhost;port=3305;dbname=mydb";
         $user= "root";
         $pass= "root";
         $option = [
@@ -23,6 +23,11 @@ class DataBase
         $myquery = $this->mycon->prepare($query);
         $myquery->execute($params);
         $this->query = $myquery;
+        return $this->query;
+    }
+
+    function get_last_id(){
+        return $this->mycon->lastInsertId();
     }
 }
 
