@@ -14,6 +14,8 @@ use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
 class QRCodeProvider{
+    const MK_QR_READED = 0;
+    private $secret = "psd12123434";
     function __construct()
     {
         
@@ -27,13 +29,24 @@ class QRCodeProvider{
     function __invoke($req,$res,$args)
     {
         $db = new Database();
-        //$db->query("insert into discount");
+        $query = $db->query("insert into discount_items(discount_ratue,iat,nbf,active_state)values(?,?,?,?)",[
+            50,
+            time(),
+            time() + (60*60),
+            "active"
+        ]);
 
-        $data_to_encoded = ["somthing"];
-        $data = $this->jwt_encoder("HS256","psd12123434",$data_to_encoded);
+        $id = $db->get_last_id();
+        var_dump($query->errorInfo());
+
+        $data_to_encoded = [
+            "request" =>  self::MK_QR_READED,
+            "id" => $id
+        ];
+        $data = $this->jwt_encoder("HS256",$this->secret,$data_to_encoded);
 
         // generate a QR CODE
-        $this->qr_generate($data,"mypic.png");
+        $this->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
     }
 
 
