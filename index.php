@@ -10,6 +10,9 @@ $myapp = new myapp([
     ]
 ]);
 
-$myapp->get("/",new QRCodeProvider);
+$container = $myapp->getContainer();
 
+$myapp->get("/generate/{ratue}",new QRCodeProvider($container));
+
+$myapp->get("/process/");
 $myapp->run();

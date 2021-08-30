@@ -11,3 +11,11 @@
 
 - make user table
 - wrap all the app with basic auth && jwt auth as well as
+
+
+
+
+__ notices __
+
+make api as a restful returnning json in every endpoint in programme
+in order to use in 

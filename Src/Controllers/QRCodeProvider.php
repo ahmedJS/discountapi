@@ -14,44 +14,57 @@ use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
 class QRCodeProvider{
-    const MK_QR_READED = 0;
+    const QRCODEPROVIDER_UNACTIVE = 0;
     private $secret = "psd12123434";
-    function __construct()
+    function __construct($container)
     {
-        
+        $this->container = $container;
     }
 
     /**
      * invoke function that deployed when class used as a function 
-     * and it is considered as start point
+     * and it is considered as start point 
+     * clinet function of generation route
+     * intent here is generate a url QR that when scan and locate , it will used once and nuactivated
+     * e.i http://www.discountapi/process/token it will return done or unactivated
      * @return ResponseInterface
      */
     function __invoke($req,$res,$args)
     {
+        $ratue = $args["ratue"];
+
         $db = new Database();
+        
         $query = $db->query("insert into discount_items(discount_ratue,iat,nbf,active_state)values(?,?,?,?)",[
-            50,
+            $ratue,
             time(),
             time() + (60*60),
             "active"
         ]);
 
-        $id = $db->get_last_id();
-        var_dump($query->errorInfo());
-
+        $id = $db->get_last_id(); 
+        
         $data_to_encoded = [
-            "request" =>  self::MK_QR_READED,
+            "request" =>  self::QRCODEPROVIDER_UNACTIVE,
             "id" => $id
         ];
+
+        // encode data and convert into token
         $data = $this->jwt_encoder("HS256",$this->secret,$data_to_encoded);
 
         // generate a QR CODE
-        $this->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
+        // and return the response object with body contains the png echoed
+        $qr = $this->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
+
+        // insert it into response returned
+        $res->getBody()->write($qr["qrcode"]);
+        return $res->withHeader("Content-Type",$qr["mimetype"]);
     }
 
 
     /**
-     * @return array an associative array containing qr code and mime type
+     * this function make qr code as well as return it as string and its mime type
+     * @return array an associative array containing "qrcode" and "mimetype"
      * @param string $data_included the data that needed to the qr code included
      * @param string $path string that specify the directory and name of the qr code image file
      */
@@ -65,7 +78,7 @@ class QRCodeProvider{
         ->size(300)
         ->margin(10)
         ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-        ->labelText('This is the label')
+        ->labelText('discount item')
         ->labelFont(new NotoSans(20))
         ->labelAlignment(new LabelAlignmentCenter())
         ->build();
@@ -78,7 +91,9 @@ class QRCodeProvider{
     }
 
 
-
+    /**
+     * @return string jwt token of provided data
+     */
     function jwt_encoder(string $algorithm,string $secret_key,Array $content):string {
         $var = JWT::encode([
             "aud" => "name",
