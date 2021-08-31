@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use Firebase\JWT\JWT;
+
 use Psr\Http\Message\ResponseInterface;
 use MyDeps\Database\DataBase;
 
@@ -12,10 +12,13 @@ use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use Controllers\Header;
 
-class QRCodeProvider{
+class QRCodeProvider extends Header{
     const QRCODEPROVIDER_UNACTIVE = 0;
-    private $secret = "psd12123434";
+    
+    private $container;
+    
     function __construct($container)
     {
         $this->container = $container;
@@ -95,12 +98,13 @@ class QRCodeProvider{
      * @return string jwt token of provided data
      */
     function jwt_encoder(string $algorithm,string $secret_key,Array $content):string {
-        $var = JWT::encode([
+        $jwt_lib = $this->container->JWT;
+        $var = $jwt_lib::encode([
             "aud" => "name",
             "iat" => time(),
             "nbf" => time() + (60*60*60),
             "content" => $content
-        ],$secret_key,$algorithm);
+        ],$this->get_jwt_key(),$algorithm);
 
         return $var;
     }
