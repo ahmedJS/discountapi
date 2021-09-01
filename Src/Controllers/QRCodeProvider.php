@@ -15,8 +15,6 @@ use Endroid\QrCode\Writer\PngWriter;
 use Controllers\Header;
 
 class QRCodeProvider extends Header{
-    const QRCODEPROVIDER_UNACTIVE = 0;
-    
     private $container;
     
     function __construct($container)
@@ -47,6 +45,8 @@ class QRCodeProvider extends Header{
 
         $id = $db->get_last_id(); 
         
+        // if the request 1 it mean active
+        // if the request 0 it mean unactive
         $data_to_encoded = [
             "request" =>  self::QRCODEPROVIDER_UNACTIVE,
             "id" => $id
