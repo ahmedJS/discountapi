@@ -3,21 +3,13 @@ namespace Controllers;
 
 
 use Psr\Http\Message\ResponseInterface;
-use MyDeps\Database\DataBase;
 
-use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
-use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
-use Endroid\QrCode\Writer\PngWriter;
 use Controllers\Header;
 
 class QRCodeProvider extends Header{
     private $container;
     
-    function __construct($container)
+    function __construct(\Interop\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
@@ -34,7 +26,7 @@ class QRCodeProvider extends Header{
     {
         $ratue = $args["ratue"];
 
-        $db = new Database();
+        $db = $this->DataBase;
         
         $query = $db->query("insert into discount_items(discount_ratue,iat,nbf,active_state)values(?,?,?,?)",[
             $ratue,
@@ -53,59 +45,15 @@ class QRCodeProvider extends Header{
         ];
 
         // encode data and convert into token
-        $data = $this->jwt_encoder("HS256",$this->secret,$data_to_encoded);
+        $data = $this->QR->jwt_encoder("HS256",$this->secret,$data_to_encoded);
 
         // generate a QR CODE
         // and return the response object with body contains the png echoed
-        $qr = $this->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
+        $qr = $this->QR->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
 
         // insert it into response returned
         $res->getBody()->write($qr["qrcode"]);
         return $res->withHeader("Content-Type",$qr["mimetype"]);
     }
 
-
-    /**
-     * this function make qr code as well as return it as string and its mime type
-     * @return array an associative array containing "qrcode" and "mimetype"
-     * @param string $data_included the data that needed to the qr code included
-     * @param string $path string that specify the directory and name of the qr code image file
-     */
-    function qr_generate($data_included,$path){
-        $result = Builder::create()
-        ->writer(new PngWriter())
-        ->writerOptions([])
-        ->data($data_included)
-        ->encoding(new Encoding('UTF-8'))
-        ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
-        ->size(300)
-        ->margin(10)
-        ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-        ->labelText('discount item')
-        ->labelFont(new NotoSans(20))
-        ->labelAlignment(new LabelAlignmentCenter())
-        ->build();
-
-        $result->saveToFile($path);
-        
-        return ["qrcode" => $result->getString()
-                ,"mimetype" => $result->getMimeType()
-        ];
-    }
-
-
-    /**
-     * @return string jwt token of provided data
-     */
-    function jwt_encoder(string $algorithm,string $secret_key,Array $content):string {
-        $jwt_lib = $this->container->JWT;
-        $var = $jwt_lib::encode([
-            "aud" => "name",
-            "iat" => time(),
-            "nbf" => time() + (60*60*60),
-            "content" => $content
-        ],$this->get_jwt_key(),$algorithm);
-
-        return $var;
-    }
 }

@@ -3,6 +3,9 @@ use Slim\App as myapp;
 use Controllers\QRCodeProvider;
 use Controllers\Process;
 use Firebase\JWT\JWT;
+use MyDeps\Database\DataBase;
+
+use MyDeps\QRUtility\QR;
 
 require_once "vendor/autoload.php";
 
@@ -13,7 +16,10 @@ $myapp = new myapp([
 ]);
 
 $container = $myapp->getContainer();
+
 $container["JWT"] = function(){return new JWT;};
+$container["QR"] = function(){return new QR;};
+$container["DataBase"] = function(){return new DataBase;};
 
 $myapp->get("/generate/{ratue}",new QRCodeProvider($container));
 
