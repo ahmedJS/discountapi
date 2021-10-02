@@ -4,10 +4,12 @@ use Controllers\QRCodeProvider;
 use Controllers\Process;
 use Firebase\JWT\JWT;
 use MyDeps\Database\DataBase;
-
 use MyDeps\QRUtility\QR;
 
 require_once "vendor/autoload.php";
+
+// obtaining doctrine orm
+require_once "bootstrap.php";
 
 $myapp = new myapp([
     "settings"=>[
@@ -19,7 +21,9 @@ $container = $myapp->getContainer();
 
 $container["JWT"] = function(){return new JWT;};
 $container["QR"] = function(){return new QR;};
-$container["DataBase"] = function(){return new DataBase;};
+
+//inject entity manager
+$container["em"] = function() use($entityManager) {return $entityManager;};
 
 $myapp->get("/generate/{ratue}",new QRCodeProvider($container));
 

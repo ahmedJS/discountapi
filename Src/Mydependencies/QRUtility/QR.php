@@ -68,8 +68,8 @@ class QR{
     }
 
     /**
-     * @return array of decoded token on success
-     * @return false when token not valid
+     * @return mixed of decoded token on success
+     * @return bool false when token not valid
      * @param string $token the token need to validation
      */
     function check_valid_jwt_token($token,$secret_key,$algorithm = "HS256"){

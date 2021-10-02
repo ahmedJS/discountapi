@@ -3,13 +3,16 @@
         "slim/slim": "3.0.0",
         "tuupola/slim-basic-auth": "3.0.0",
         "firebase/php-jwt": "3.0.0",
-        "endroid/qr-code": "^4.2"
+        "endroid/qr-code": "^4.2",
+        "doctrine/orm": "^2.9",
+        "symfony/cache": "^5.3"
     },
 
     "autoload": {
         "psr-4": {
             "Controllers\\": "Src/Controllers/",
-            "MyDeps\\": "Src/Mydependencies/"
+            "MyDeps\\": "Src/Mydependencies/",
+            "Entities\\": "Src/Entities"
         }
     }
 }
