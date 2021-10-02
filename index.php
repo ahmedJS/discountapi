@@ -3,7 +3,6 @@ use Slim\App as myapp;
 use Controllers\QRCodeProvider;
 use Controllers\Process;
 use Firebase\JWT\JWT;
-use MyDeps\Database\DataBase;
 use MyDeps\QRUtility\QR;
 
 require_once "vendor/autoload.php";

@@ -17,7 +17,7 @@ class Process extends \Controllers\Header{
      */
     function __invoke($req , $res, $args){
         $token = $args["data"];
-        if($token = $this->QR->check_valid_jwt_token($token))
+        if($token = $this->container->QR->check_valid_jwt_token($token))
         {
             // here processing with database
         }

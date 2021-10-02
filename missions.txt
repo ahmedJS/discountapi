@@ -19,3 +19,9 @@ __ notices __
 
 make api as a restful returnning json in every endpoint in programme
 in order to use in 
+
+
+__ 2021/10/2 __ 
+
+complete the processes between database and server
+make auth system
