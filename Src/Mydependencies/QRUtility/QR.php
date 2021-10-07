@@ -11,6 +11,7 @@ use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
 use Firebase\JWT\JWT;
+
 class QR{
 
     /**
@@ -73,10 +74,10 @@ class QR{
      * @param string $token the token need to validation
      */
     function check_valid_jwt_token($token,$secret_key,$algorithm = "HS256"){
-        $jwt_lib = $this->container->JWT;
+        $this->jwt_lib = $this->container->JWT;
         if($token) {
             // make sure if it valid token or not as well as decode it
-            $details = $jwt_lib::decode($token,$secret_key,$algorithm);
+            $details = $this->jwt_lib::decode($token,$secret_key,$algorithm);
                 if($details)
                 {
                     return $details;
@@ -84,4 +85,9 @@ class QR{
         }
         return false;
     }
+
+        function checkExpiredJWTToken($token)
+        {
+            $this->jwt_lib::dec
+        }
 }
