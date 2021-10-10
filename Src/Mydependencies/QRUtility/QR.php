@@ -88,6 +88,6 @@ class QR{
 
         function checkExpiredJWTToken($token)
         {
-            $this->jwt_lib::dec
+            
         }
 }
