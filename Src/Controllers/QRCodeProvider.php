@@ -34,24 +34,7 @@ class QRCodeProvider extends Header{
             // obtain the doctrine entityManager
             $em = $this->container->em;
             
-            $discount_entity = new DiscountItems;
-
-            // generate random tokens
-            $token = $this->randomTokensGenerate();
-
-            // set the entity information
-            $discount_entity->setActive_state("active")
-                ->setDiscount_ratue($ratue)
-                ->setIat(new DateTime())
-                ->setNbf(new DateTime("now +1 minute"))
-                ->setToken($token);
-
-            $data_to_encoded = ["token" =>  $token];
-            // make sure this record is inserted into database as well
-            if(1){
-                $em->persist($discount_entity);
-                $em->flush();
-            }
+ 
             // encode data and convert into token
             $data = $this->container->QR->jwt_encoder("HS256",$this->get_jwt_key(),$data_to_encoded);
 
