@@ -13,7 +13,8 @@
         "psr-4": {
             "Controllers\\": "Src/Controllers/",
             "MyDeps\\": "Src/Mydependencies/",
-            "Entities\\": "Src/Entities"
+            "Entities\\": "Src/Entities",
+            "Models\\": "Src/Models"
         }
     }
 }

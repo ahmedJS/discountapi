@@ -18,10 +18,15 @@ class Token {
     }
 
     function generateDetails($token,$key,$allowed_alg=[]){
+        $state = "";
         try{
             $this->enc_lib->decode($token , $key , $allowed_alg);
-        }catch(\Exception $e){
-            // handle exception of each type of jwt exception
+        }catch(\Firebase\JWT\BeforeValidException $e){
+            $state = "beforeValid";
+        }catch(\Firebase\JWT\ExpiredException $e){
+            $state = "expired";
+        }catch(\Firebase\JWT\SignatureInvalidException $e){
+            $state = "invalid";
         }
     }
     

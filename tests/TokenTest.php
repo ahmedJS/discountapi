@@ -18,4 +18,8 @@ class TokenTest extends PHPUnit\Framework\TestCase{
         ];
         $enc->encode($payload,"key");
     }
+
+    function testThrowException(){
+        
+    }
 }

@@ -7,158 +7,189 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="discount_items")
  */
 class DiscountItems {
-/**
- * @ORM\Id
- * @ORM\Column(type="integer")
- * @ORM\GeneratedValue(strategy="AUTO")
- */
-private $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-/**
- * @ORM\Column(type="string")
- */
-private $token;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $token;
 
-/**
- * @ORM\Column(type="integer")
- * @var integer
- */
-private $discount_ratue;
+    /**
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    private $discount_ratue;
 
-/**
- * @ORM\Column(type="datetime")
- * @var DateTime
- */
-private $iat;
+    /**
+     * @ORM\Column(type="datetime")
+     * @var DateTime
+     */
+    private $iat;
 
-/**
- * @ORM\Column(type="datetime")
- * @var DateTime
- */
-private $nbf;
+    /**
+     * @ORM\Column(type="datetime")
+     * @var DateTime
+     */
+    private $nbf;
 
-/**
- * @ORM\Column(type="string")
- */
-private $active_state;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $active_state;
 
-/**
- * Get the value of discount_ratue
- *
- * @return  integer
- */ 
-public function getDiscount_ratue()
-{
-return $this->discount_ratue;
-}
+    /**
+     * @ORM\Column(type="datetime")
+     * @var DateTime
+     */
+    private $exp;
 
-/**
- * Set the value of discount_ratue
- *
- * @param  integer  $discount_ratue
- *
- * @return  self
- */ 
-public function setDiscount_ratue($discount_ratue)
-{
-$this->discount_ratue = $discount_ratue;
+    /**
+     * Get the value of discount_ratue
+     *
+     * @return  integer
+     */ 
+    public function getDiscount_ratue()
+    {
+    return $this->discount_ratue;
+    }
 
-return $this;
-}
+    /**
+     * Set the value of discount_ratue
+     *
+     * @param  integer  $discount_ratue
+     *
+     * @return  self
+     */ 
+    public function setDiscount_ratue($discount_ratue)
+    {
+    $this->discount_ratue = $discount_ratue;
 
-/**
- * Get the value of iat
- *
- * @return  DateTime
- */ 
-public function getIat()
-{
-return $this->iat;
-}
+    return $this;
+    }
 
-/**
- * Set the value of iat
- *
- * @param  DateTime  $iat
- *
- * @return  self
- */ 
-public function setIat(\DateTime $iat)
-{
-$this->iat = $iat;
+    /**
+     * Get the value of iat
+     *
+     * @return  DateTime
+     */ 
+    public function getIat()
+    {
+    return $this->iat;
+    }
 
-return $this;
-}
+    /**
+     * Set the value of iat
+     *
+     * @param  DateTime  $iat
+     *
+     * @return  self
+     */ 
+    public function setIat(\DateTime $iat)
+    {
+    $this->iat = $iat;
 
-/**
- * Get the value of nbf
- *
- * @return  DateTime
- */ 
-public function getNbf()
-{
-return $this->nbf;
-}
+    return $this;
+    }
 
-/**
- * Set the value of nbf
- *
- * @param  DateTime  $nbf
- *
- * @return  self
- */ 
-public function setNbf(\DateTime $nbf)
-{
-$this->nbf = $nbf;
+    /**
+     * Get the value of nbf
+     *
+     * @return  DateTime
+     */ 
+    public function getNbf()
+    {
+    return $this->nbf;
+    }
 
-return $this;
-}
+    /**
+     * Set the value of nbf
+     *
+     * @param  DateTime  $nbf
+     *
+     * @return  self
+     */ 
+    public function setNbf(\DateTime $nbf)
+    {
+    $this->nbf = $nbf;
 
-/**
- * Get the value of active_state
- */ 
-public function getActive_state()
-{
-return $this->active_state;
-}
+    return $this;
+    }
 
-/**
- * Set the value of active_state
- *
- * @return  self
- */ 
-public function setActive_state($active_state)
-{
-$this->active_state = $active_state;
+    /**
+     * Get the value of active_state
+     */ 
+    public function getActive_state()
+    {
+    return $this->active_state;
+    }
 
-return $this;
-}
+    /**
+     * Set the value of active_state
+     *
+     * @return  self
+     */ 
+    public function setActive_state($active_state)
+    {
+    $this->active_state = $active_state;
 
-/**
- * Get the value of id
- */ 
-public function getId()
-{
-return $this->id;
-}
+    return $this;
+    }
 
-/**
- * Get the value of token
- */ 
-public function getToken()
-{
-return $this->token;
-}
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+    return $this->id;
+    }
 
-/**
- * Set the value of token
- *
- * @return  self
- */ 
-public function setToken($token)
-{
-$this->token = $token;
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+    return $this->token;
+    }
 
-return $this;
-}
+    /**
+     * Set the value of token
+     *
+     * @return  self
+     */ 
+    public function setToken($token)
+    {
+    $this->token = $token;
+
+    return $this;
+    }
+
+    /**
+     * Get the value of exp
+     *
+     * @return  DateTime
+     */ 
+    public function getExp()
+    {
+    return $this->exp;
+    }
+
+    /**
+     * Set the value of exp
+     *
+     * @param  DateTime  $exp
+     *
+     * @return  self
+     */ 
+    public function setExp(\DateTime $exp)
+    {
+    $this->exp = $exp;
+
+    return $this;
+    }
+
 }

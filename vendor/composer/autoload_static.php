@@ -64,6 +64,7 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         'M' => 
         array (
             'MyDeps\\' => 7,
+            'Models\\' => 7,
         ),
         'I' => 
         array (
@@ -110,8 +111,8 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -214,6 +215,10 @@ class ComposerStaticInit41f20b2c093972508d174a9906280a8f
         'MyDeps\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Src/Mydependencies',
+        ),
+        'Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Src/Models',
         ),
         'Interop\\Http\\Factory\\' => 
         array (

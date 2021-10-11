@@ -6,7 +6,7 @@ colors = "true"
 stopOnFailure="false">
     <testsuites >
         <testsuite name="My test suite">
-            <directory>Src/Mydependencies/Encryption/tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

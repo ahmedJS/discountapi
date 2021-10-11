@@ -109,7 +109,7 @@ final class Versions
   'tuupola/http-factory' => '0.3.0@57b2e19ff3f4af0bbee4e31fd282689be351f1ad',
   'tuupola/slim-basic-auth' => '3.0.0@c2cb6c28015173f4b7532b9931225fe76dd3683d',
   'webmozart/assert' => '1.10.0@6964c76c7804814a842473e0c8fd15bab0f18e25',
-  '__root__' => '1.x-dev@70a952badcda900f87f68cab6dc76d2cb07ddb0a',
+  '__root__' => '1.x-dev@a0bc7706cc65c35c89b984ab8d5555e5290ecb34',
 );
 
     private function __construct()

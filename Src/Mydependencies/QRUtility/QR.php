@@ -10,8 +10,6 @@ use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
-use Firebase\JWT\JWT;
-
 class QR{
 
     /**
@@ -55,36 +53,36 @@ class QR{
     /**
      * @return string jwt token of provided data
      */
-    function jwt_encoder(string $algorithm,string $secret_key,Array $content)
-    {
-        $jwt_lib = new JWT;
-        $var = $jwt_lib::encode([
-            "aud" => "name",
-            "iat" => time(),
-            "nbf" => time() + (60*60*60),
-            "content" => $content
-        ],$secret_key,$algorithm);
+    // function jwt_encoder(string $algorithm,string $secret_key,Array $content)
+    // {
+    //     $jwt_lib = new JWT;
+    //     $var = $jwt_lib::encode([
+    //         "aud" => "name",
+    //         "iat" => time(),
+    //         "nbf" => time() + (60*60*60),
+    //         "content" => $content
+    //     ],$secret_key,$algorithm);
 
-        return $var;
-    }
+    //     return $var;
+    // }
 
     /**
      * @return mixed of decoded token on success
      * @return bool false when token not valid
      * @param string $token the token need to validation
      */
-    function check_valid_jwt_token($token,$secret_key,$algorithm = "HS256"){
-        $this->jwt_lib = $this->container->JWT;
-        if($token) {
-            // make sure if it valid token or not as well as decode it
-            $details = $this->jwt_lib::decode($token,$secret_key,$algorithm);
-                if($details)
-                {
-                    return $details;
-                }  
-        }
-        return false;
-    }
+    // function check_valid_jwt_token($token,$secret_key,$algorithm = "HS256"){
+    //     $this->jwt_lib = $this->container->JWT;
+    //     if($token) {
+    //         // make sure if it valid token or not as well as decode it
+    //         $details = $this->jwt_lib::decode($token,$secret_key,$algorithm);
+    //             if($details)
+    //             {
+    //                 return $details;
+    //             }  
+    //     }
+    //     return false;
+    // }
 
         function checkExpiredJWTToken($token)
         {
