@@ -9,7 +9,7 @@ namespace MyDeps\Encryption;
 class Token {
     protected IEncrypt $enc_lib;
     private string $token;
-    private bool $expired;
+    private int $state;
     private array $content;
 
     function __construct(IEncrypt $enc_lib)
@@ -22,11 +22,11 @@ class Token {
         try{
             $this->enc_lib->decode($token , $key , $allowed_alg);
         }catch(\Firebase\JWT\BeforeValidException $e){
-            $state = "beforeValid";
+            $state = BEFOREVALID;
         }catch(\Firebase\JWT\ExpiredException $e){
-            $state = "expired";
+            $state = EXPIRED;
         }catch(\Firebase\JWT\SignatureInvalidException $e){
-            $state = "invalid";
+            $state = INVALID;
         }
     }
     
