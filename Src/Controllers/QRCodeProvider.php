@@ -3,7 +3,7 @@ namespace Controllers;
 
 
 use Psr\Http\Message\ResponseInterface;
-use Entities\DiscountItems;
+use Models\DiscountItemsModel;
 use Controllers\Header;
 use DateTime;
 
@@ -29,24 +29,26 @@ class QRCodeProvider extends Header{
         // need validation
         $ratue = $args["ratue"];
         
-        if(1){
+        // obtain the doctrine entityManager
+        $em = $this->container->em;
+        
+        // obtain discount items model
+        $dim = new DiscountItemsModel($em);
+        
+        $data = $dim->addDiscountItem("active",$ratue,new DateTime(),new DateTime(),new DateTime());
 
-            // obtain the doctrine entityManager
-            $em = $this->container->em;
-            
- 
-            // encode data and convert into token
-            $data = $this->container->QR->jwt_encoder("HS256",$this->get_jwt_key(),$data_to_encoded);
+        // encode data and convert into token
+        $data = $this->container->QR->jwt_encoder("HS256",$this->get_jwt_key(),$data);
 
-            // generate a QR CODE
-            $qr = $this->container->QR->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
+        // generate a QR CODE
+        $qr = $this->container->QR->qr_generate("http://www.discountapi/process/".$data,"mypic.png");
 
-            // insert it into response returned
-            $res->getBody()->write($qr["qrcode"]);
+        // insert it into response returned
+        $res->getBody()->write($qr["qrcode"]);
 
-            // and return the response object with body contains the png echoed
-            return $res->withHeader("Content-Type",$qr["mimetype"]);
-        }
+        // and return the response object with body contains the png echoed
+        return $res->withHeader("Content-Type",$qr["mimetype"]);
+    }
 
 
     }

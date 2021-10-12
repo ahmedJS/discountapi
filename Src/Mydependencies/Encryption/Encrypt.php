@@ -10,6 +10,10 @@ class Encrypt implements IEncrypt{
         return JWT::encode($payload , $key,$algorithm);
     }
 
+    /**
+     * @return StdClass
+     * @return void otherwise
+     */
     function decode($token , $key , $allowed_alg=[])
     {
         return JWT::decode($token , $key , $allowed_alg);

@@ -10,7 +10,7 @@ class Token {
     protected IEncrypt $enc_lib;
     private string $token;
     private int $state;
-    private array $content;
+    private mixed $content;
 
     function __construct(IEncrypt $enc_lib)
     {
@@ -18,23 +18,56 @@ class Token {
     }
 
     function generateDetails($token,$key,$allowed_alg=[]){
-        $state = "";
+        $state = State::VALID;
+        $content = null;
         try{
-            $this->enc_lib->decode($token , $key , $allowed_alg);
+            $content = $this->enc_lib->decode($token , $key , $allowed_alg);
         }catch(\Firebase\JWT\BeforeValidException $e){
-            $state = BEFOREVALID;
+            $state = State::BEFOREVALID;
         }catch(\Firebase\JWT\ExpiredException $e){
-            $state = EXPIRED;
+            $state = State::EXPIRED;
         }catch(\Firebase\JWT\SignatureInvalidException $e){
-            $state = INVALID;
+            $state = State::INVALID;
         }
+
+        $this->token = $token;
+        $this->state = $state;
+        $this->content = $content;
     }
     
     /**
      * @return Array Containing content and expired or not
      */
     function GetDetails(){
-        
+        return [
+            "token" => $this->getToken,
+            "state" => $this->getState,
+            "content" => $this->getContent
+        ];
+    }
+
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Get the value of state
+     */ 
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Get the value of content
+     */ 
+    public function getContent()
+    {
+        return $this->content;
     }
 }
 
